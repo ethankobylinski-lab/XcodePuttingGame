@@ -6,6 +6,16 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		DD1E15D72E1B6AA6003B99C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD1E15D62E1B6AA6003B99C8 /* Assets.xcassets */; };
+		DD1E16182E1C0B36003B99C8 /* PuttingGameV1Tests.xctest in Resources */ = {isa = PBXBuildFile; fileRef = DD1E15DC2E1B6AA7003B99C8 /* PuttingGameV1Tests.xctest */; };
+		DD1E16392E1C0FE4003B99C8 /* Challenge+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1E16352E1C0FE4003B99C8 /* Challenge+CoreDataClass.swift */; };
+		DD1E163A2E1C0FE4003B99C8 /* Challenge+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1E16362E1C0FE4003B99C8 /* Challenge+CoreDataProperties.swift */; };
+		DD1E163B2E1C0FE4003B99C8 /* Putt+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1E16372E1C0FE4003B99C8 /* Putt+CoreDataClass.swift */; };
+		DD1E163C2E1C0FE4003B99C8 /* Putt+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1E16382E1C0FE4003B99C8 /* Putt+CoreDataProperties.swift */; };
+		DD1E166B2E1C4FAA003B99C8 /* PuttingGameModel.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = DD1E16312E1C0DF1003B99C8 /* PuttingGameModel.xcdatamodeld */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		DD1E15DD2E1B6AA7003B99C8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -25,24 +35,21 @@
 
 /* Begin PBXFileReference section */
 		DD1E15CF2E1B6AA2003B99C8 /* PuttingGameV1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PuttingGameV1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD1E15D62E1B6AA6003B99C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD1E15DC2E1B6AA7003B99C8 /* PuttingGameV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PuttingGameV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD1E15E62E1B6AA7003B99C8 /* PuttingGameV1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PuttingGameV1UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD1E16172E1C0AFE003B99C8 /* PuttTrackerViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PuttTrackerViewModelTests.swift; sourceTree = "<group>"; };
+		DD1E16322E1C0DF1003B99C8 /* PuttingGameModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PuttingGameModel.xcdatamodel; sourceTree = "<group>"; };
+		DD1E16352E1C0FE4003B99C8 /* Challenge+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Challenge+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DD1E16362E1C0FE4003B99C8 /* Challenge+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Challenge+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DD1E16372E1C0FE4003B99C8 /* Putt+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Putt+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DD1E16382E1C0FE4003B99C8 /* Putt+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Putt+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		DD1E15D12E1B6AA2003B99C8 /* PuttingGameV1 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = PuttingGameV1;
-			sourceTree = "<group>";
-		};
-		DD1E15DF2E1B6AA7003B99C8 /* PuttingGameV1Tests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = PuttingGameV1Tests;
-			sourceTree = "<group>";
-		};
-		DD1E15E92E1B6AA7003B99C8 /* PuttingGameV1UITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = PuttingGameV1UITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -75,10 +82,14 @@
 		DD1E15C62E1B6AA2003B99C8 = {
 			isa = PBXGroup;
 			children = (
+				DD1E16352E1C0FE4003B99C8 /* Challenge+CoreDataClass.swift */,
+				DD1E16362E1C0FE4003B99C8 /* Challenge+CoreDataProperties.swift */,
+				DD1E16372E1C0FE4003B99C8 /* Putt+CoreDataClass.swift */,
+				DD1E16382E1C0FE4003B99C8 /* Putt+CoreDataProperties.swift */,
+				DD1E16312E1C0DF1003B99C8 /* PuttingGameModel.xcdatamodeld */,
 				DD1E15D12E1B6AA2003B99C8 /* PuttingGameV1 */,
-				DD1E15DF2E1B6AA7003B99C8 /* PuttingGameV1Tests */,
-				DD1E15E92E1B6AA7003B99C8 /* PuttingGameV1UITests */,
 				DD1E15D02E1B6AA2003B99C8 /* Products */,
+				DD1E15D62E1B6AA6003B99C8 /* Assets.xcassets */,
 			);
 			sourceTree = "<group>";
 		};
@@ -87,6 +98,7 @@
 			children = (
 				DD1E15CF2E1B6AA2003B99C8 /* PuttingGameV1.app */,
 				DD1E15DC2E1B6AA7003B99C8 /* PuttingGameV1Tests.xctest */,
+				DD1E16172E1C0AFE003B99C8 /* PuttTrackerViewModelTests.swift */,
 				DD1E15E62E1B6AA7003B99C8 /* PuttingGameV1UITests.xctest */,
 			);
 			name = Products;
@@ -130,9 +142,6 @@
 			dependencies = (
 				DD1E15DE2E1B6AA7003B99C8 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				DD1E15DF2E1B6AA7003B99C8 /* PuttingGameV1Tests */,
-			);
 			name = PuttingGameV1Tests;
 			packageProductDependencies = (
 			);
@@ -152,9 +161,6 @@
 			);
 			dependencies = (
 				DD1E15E82E1B6AA7003B99C8 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				DD1E15E92E1B6AA7003B99C8 /* PuttingGameV1UITests */,
 			);
 			name = PuttingGameV1UITests;
 			packageProductDependencies = (
@@ -212,6 +218,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD1E166B2E1C4FAA003B99C8 /* PuttingGameModel.xcdatamodeld in Resources */,
+				DD1E15D72E1B6AA6003B99C8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +227,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD1E16182E1C0B36003B99C8 /* PuttingGameV1Tests.xctest in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +245,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD1E16392E1C0FE4003B99C8 /* Challenge+CoreDataClass.swift in Sources */,
+				DD1E163A2E1C0FE4003B99C8 /* Challenge+CoreDataProperties.swift in Sources */,
+				DD1E163B2E1C0FE4003B99C8 /* Putt+CoreDataClass.swift in Sources */,
+				DD1E163C2E1C0FE4003B99C8 /* Putt+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,6 +563,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DD1E16312E1C0DF1003B99C8 /* PuttingGameModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DD1E16322E1C0DF1003B99C8 /* PuttingGameModel.xcdatamodel */,
+			);
+			currentVersion = DD1E16322E1C0DF1003B99C8 /* PuttingGameModel.xcdatamodel */;
+			path = PuttingGameModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = DD1E15C72E1B6AA2003B99C8 /* Project object */;
 }

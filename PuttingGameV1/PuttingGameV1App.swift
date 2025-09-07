@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct PuttingGameV1App: App {
+    @StateObject private var sessionStore = SessionStore()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(sessionStore: sessionStore)
         }
     }
 }

@@ -1,21 +1,37 @@
-//
-//  ContentView.swift
-//  PuttingGameV1
-//
-//  Created by Ethan Kobylinski on 7/6/25.
-//
-
 import SwiftUI
+import PuttingGameCore
 
+/// Simple interface to simulate practice putts and demonstrate tip overlays.
 struct ContentView: View {
+    @State private var session = PracticeSession()
+    @State private var distance: Double = 5
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack {
+            VStack(spacing: 24) {
+                Stepper("Distance: \(Int(distance)) ft", value: $distance, in: 1...60)
+                HStack {
+                    Button("Make") {
+                        session.recordPutt(distance: distance, made: true)
+                    }
+                    .buttonStyle(.borderedProminent)
+
+                    Button("Miss") {
+                        session.recordPutt(distance: distance, made: false)
+                    }
+                    .buttonStyle(.bordered)
+                }
+            }
+            .padding()
+
+            if let tip = session.activeTip {
+                TipOverlay(tip: tip) {
+                    session.dismissTip()
+                }
+                .transition(.opacity)
+            }
         }
-        .padding()
+        .animation(.default, value: session.activeTip)
     }
 }
 

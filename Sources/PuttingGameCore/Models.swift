@@ -66,5 +66,14 @@ public struct Profile: Codable, Sendable {
 }
 
 public enum BadgeID: String, Codable, Sendable, CaseIterable {
-    case iceCold, clutch, ladderMaster, speedDemon, consistency, leftBreakTamer
+    // Consistency
+    case firstMake, tenMakes, noMiss, sessionMaster
+    // Distance Mastery
+    case iceCold, smoothOperator, clutch, ladderMaster, longBomb
+    // Break Mastery
+    case straightShooter, leftBreakTamer, rightBreakRuler, slopeConqueror, breakArtist
+    // Streaks
+    case streakStarter, threeDayStreak, weekWarrior
+    // Quests
+    case speedDemon, nightOwl, marathon
 }

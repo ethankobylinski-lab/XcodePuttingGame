@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import QuartzCore
 
 final class PuttingGameV1UITests: XCTestCase {
 
@@ -36,6 +37,53 @@ final class PuttingGameV1UITests: XCTestCase {
         // This measures how long it takes to launch your application.
         measure(metrics: [XCTApplicationLaunchMetric()]) {
             XCUIApplication().launch()
+        }
+    }
+
+    @MainActor
+    func testMinimumFrameRate() throws {
+        let app = XCUIApplication()
+        app.launch()
+
+        let expectation = XCTestExpectation(description: "Measure 1s of frames")
+        var measuredFPS: Double = 0
+
+        let counter = FrameCounter(duration: 1) { fps in
+            measuredFPS = fps
+            expectation.fulfill()
+        }
+        counter.start()
+
+        wait(for: [expectation], timeout: 2)
+        XCTAssertGreaterThanOrEqual(measuredFPS, 55, "Expected at least 55 fps on iPhone 12")
+    }
+}
+
+/// Utility object that counts display link frames over a fixed duration.
+private final class FrameCounter {
+    private let duration: CFTimeInterval
+    private let completion: (Double) -> Void
+    private var displayLink: CADisplayLink?
+    private var start: CFTimeInterval = 0
+    private var frames: Int = 0
+
+    init(duration: CFTimeInterval, completion: @escaping (Double) -> Void) {
+        self.duration = duration
+        self.completion = completion
+    }
+
+    func start() {
+        start = CFAbsoluteTimeGetCurrent()
+        displayLink = CADisplayLink(target: self, selector: #selector(step(link:)))
+        displayLink?.add(to: .main, forMode: .default)
+    }
+
+    @objc private func step(link: CADisplayLink) {
+        frames += 1
+        let elapsed = CFAbsoluteTimeGetCurrent() - start
+        if elapsed >= duration {
+            link.invalidate()
+            completion(Double(frames) / elapsed)
         }
     }
 }

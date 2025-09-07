@@ -1,3 +1,4 @@
+#if canImport(SpriteKit)
 import SpriteKit
 
 /// A reusable confetti effect backed by up to three `SKEmitterNode` instances.
@@ -46,5 +47,6 @@ public final class ConfettiEmitter: SKNode {
     public func stop() {
         emitters.forEach { $0.particleBirthRate = 0 }
     }
-}
+  }
+#endif
 

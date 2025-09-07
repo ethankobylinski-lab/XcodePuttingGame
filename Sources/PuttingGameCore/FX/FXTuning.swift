@@ -1,3 +1,4 @@
+#if canImport(CoreGraphics)
 import CoreGraphics
 
 /// Central tuning table for in-game visual effects.
@@ -29,5 +30,6 @@ public enum FXTuning {
 
     /// Current tuning values for the confetti effect.
     public static var confetti = Confetti.default
-}
+  }
+#endif
 

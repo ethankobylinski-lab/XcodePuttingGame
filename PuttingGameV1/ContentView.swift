@@ -10,28 +10,82 @@ import PuttingGameCore
 
 struct ContentView: View {
     @EnvironmentObject var themeManager: ThemeManager
+    @StateObject private var questManager = QuestManager()
+    @State private var session = Session()
+    @State private var profile = Profile()
+    private let xpManager = XPManager()
+    private let levelManager = LevelManager()
+
+    @State private var distance: Int = 3
+    @State private var breakType: BreakType = .straight
+    @State private var speed: GreenSpeed = .medium
+    @State private var made: Bool = false
 
     var body: some View {
         NavigationStack {
-            VStack {
-                Text("Hello, world!")
-                    .foregroundColor(themeManager.theme.colors.text)
-                    .padding(themeManager.theme.radii.medium)
-                    .background(themeManager.theme.colors.foreground)
-                    .cornerRadius(themeManager.theme.radii.small)
-                    .shadow(color: themeManager.theme.shadows.standard.color,
-                            radius: themeManager.theme.shadows.standard.radius,
-                            x: themeManager.theme.shadows.standard.x,
-                            y: themeManager.theme.shadows.standard.y)
-
-                NavigationLink("Settings") {
-                    SettingsView()
+            Form {
+                Section("Profile") {
+                    Text("Level: \(profile.level)")
+                    Text("XP: \(profile.xp)")
                 }
-                .padding(.top)
+
+                Section("Record Shot") {
+                    Stepper("Distance: \(distance) ft", value: $distance, in: 1...20)
+                    Picker("Break", selection: $breakType) {
+                        ForEach(BreakType.allCases, id: \.self) { kind in
+                            Text(kind.rawValue.capitalized).tag(kind)
+                        }
+                    }
+                    Picker("Green Speed", selection: $speed) {
+                        ForEach(GreenSpeed.allCases, id: \.self) { kind in
+                            Text(kind.rawValue.capitalized).tag(kind)
+                        }
+                    }
+                    Toggle("Made it", isOn: $made)
+                    Button("Add Shot", action: addShot)
+                }
+
+                if !session.shots.isEmpty {
+                    Section("Shots") {
+                        ForEach(Array(session.shots.enumerated()), id: \.offset) { _, shot in
+                            HStack {
+                                Text("\(shot.distanceFt)ft")
+                                Spacer()
+                                Text(shot.result ? "✔︎" : "✘")
+                            }
+                        }
+                    }
+                }
+
+                Section {
+                    NavigationLink("Quests") {
+                        QuestView(manager: questManager) { reward in
+                            profile.xp += reward
+                            profile.level = levelManager.level(forXP: profile.xp)
+                        }
+                    }
+                    NavigationLink("Settings") {
+                        SettingsView()
+                    }
+                }
             }
-            .padding()
+            .navigationTitle("Putting Game")
             .background(themeManager.theme.gradients.background)
         }
+    }
+
+    private func addShot() {
+        let shot = Shot(distanceFt: distance, breakType: breakType, greenSpeed: speed, result: made)
+        session.shots.append(shot)
+        let gain = xpManager.xpForShot(shot)
+        profile.xp += gain
+        profile.level = levelManager.level(forXP: profile.xp)
+        if made {
+            questManager.quests.forEach { quest in
+                questManager.updateProgress(for: quest.id)
+            }
+        }
+        made = false
     }
 }
 

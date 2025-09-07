@@ -4,7 +4,7 @@ import CoreGraphics
 /// Central tuning table for in-game visual effects.
 public enum FXTuning {
     /// Tunable parameters for the confetti emitter.
-    public struct Confetti {
+    public struct Confetti: Sendable {
         /// Desired number of emitter nodes. The implementation caps this at three.
         public var nodeCount: Int
         /// Maximum number of particles emitted per node.
@@ -29,7 +29,7 @@ public enum FXTuning {
     }
 
     /// Current tuning values for the confetti effect.
-    public static var confetti = Confetti.default
+    @MainActor public static var confetti = Confetti.default
   }
 #endif
 

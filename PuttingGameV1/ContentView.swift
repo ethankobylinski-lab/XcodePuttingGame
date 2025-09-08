@@ -81,9 +81,7 @@ struct ContentView: View {
         profile.xp += gain
         profile.level = levelManager.level(forXP: profile.xp)
         if made {
-            questManager.quests.forEach { quest in
-                questManager.updateProgress(for: quest.id)
-            }
+            questManager.record(shot: shot)
         }
         made = false
     }

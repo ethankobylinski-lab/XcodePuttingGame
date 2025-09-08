@@ -14,6 +14,8 @@ public struct Quest: Codable, Identifiable, Equatable {
     public var goal: Int
     public var reward: Int
     public var claimed: Bool
+    public var requiredDistance: Int?
+    public var requiredBreak: BreakType?
 
     public init(id: String = UUID().uuidString,
                 frequency: Frequency,
@@ -23,7 +25,9 @@ public struct Quest: Codable, Identifiable, Equatable {
                 progress: Int = 0,
                 goal: Int,
                 reward: Int,
-                claimed: Bool = false) {
+                claimed: Bool = false,
+                requiredDistance: Int? = nil,
+                requiredBreak: BreakType? = nil) {
         self.id = id
         self.frequency = frequency
         self.title = title
@@ -33,10 +37,18 @@ public struct Quest: Codable, Identifiable, Equatable {
         self.goal = goal
         self.reward = reward
         self.claimed = claimed
+        self.requiredDistance = requiredDistance
+        self.requiredBreak = requiredBreak
     }
 
     public var isComplete: Bool { progress >= goal }
     public var timeRemaining: TimeInterval { end.timeIntervalSinceNow }
+
+    public func matches(_ shot: Shot) -> Bool {
+        if let dist = requiredDistance, shot.distanceFt != dist { return false }
+        if let brk = requiredBreak, shot.breakType != brk { return false }
+        return true
+    }
 }
 
 // Protocol to allow conditional ObservableObject conformance
@@ -74,9 +86,18 @@ public final class QuestManager: QuestManagerBase {
         save()
     }
 
-    public func updateProgress(for questID: String, by amount: Int = 1) {
-        guard let idx = quests.firstIndex(where: { $0.id == questID }) else { return }
-        quests[idx].progress = min(quests[idx].progress + amount, quests[idx].goal)
+    public func record(shot: Shot) {
+        guard shot.result else { return }
+        for idx in quests.indices {
+            if quests[idx].matches(shot) {
+                quests[idx].progress = min(quests[idx].progress + 1, quests[idx].goal)
+            }
+        }
+        save()
+    }
+
+    public func replaceQuests(_ newQuests: [Quest]) {
+        quests = newQuests
         save()
     }
 

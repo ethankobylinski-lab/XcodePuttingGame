@@ -59,7 +59,7 @@ public protocol QuestManagerBase: AnyObject {}
 #endif
 
 @MainActor
-public final class QuestManager: QuestManagerBase, @unchecked Sendable {
+public final class QuestManager: QuestManagerBase {
     private let storageKey = "QuestManager.quests"
     private let userDefaults: UserDefaults
 

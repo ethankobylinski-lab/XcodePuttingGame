@@ -18,7 +18,7 @@ public enum FXTuning {
         /// Scale applied to particle textures.
         public var scale: CGFloat
 
-        public nonisolated static let `default` = Confetti(
+        public static let `default` = Confetti(
             nodeCount: 1,
             maxParticles: 100,
             birthRate: 40,

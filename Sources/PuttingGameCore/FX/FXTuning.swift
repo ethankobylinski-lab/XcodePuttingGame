@@ -29,11 +29,7 @@ public enum FXTuning {
     }
 
     /// Current tuning values for the confetti effect.
-    @MainActor private static var confettiValue = Confetti.default
-    @MainActor public static var confetti: Confetti {
-        get { confettiValue }
-        set { confettiValue = newValue }
-    }
+    @MainActor public static var confetti: Confetti = .default
   }
 #endif
 

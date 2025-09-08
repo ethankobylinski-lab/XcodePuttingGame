@@ -1,7 +1,8 @@
 #if canImport(SpriteKit)
-import SpriteKit
+@preconcurrency import SpriteKit
 
 /// A reusable confetti effect backed by up to three `SKEmitterNode` instances.
+@MainActor
 public final class ConfettiEmitter: SKNode {
     private let tuning: FXTuning.Confetti
     private var emitters: [SKEmitterNode] = []

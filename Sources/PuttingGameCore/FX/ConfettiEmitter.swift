@@ -1,5 +1,6 @@
 #if canImport(SpriteKit)
 @preconcurrency import SpriteKit
+@preconcurrency import CoreGraphics
 
 /// A reusable confetti effect backed by up to three `SKEmitterNode` instances.
 @MainActor

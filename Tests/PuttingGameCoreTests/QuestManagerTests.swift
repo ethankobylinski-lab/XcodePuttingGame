@@ -52,10 +52,11 @@ struct QuestManagerTests {
         let quest = Quest(frequency: .daily, title: "3ft", start: now, end: end, goal: 100, reward: 10, requiredDistance: 3)
         manager.replaceQuests([quest])
         let shot = Shot(distanceFt: 3, breakType: .straight, greenSpeed: .medium, result: true)
-        let tasks = (0..<100).map { _ in
-            Task.detached { await manager.record(shot: shot) }
+        await withTaskGroup(of: Void.self) { group in
+            for _ in 0..<100 {
+                group.addTask { await manager.record(shot: shot) }
+            }
         }
-        for task in tasks { await task.value }
         #expect(manager.quests.first?.progress == 100)
     }
 }

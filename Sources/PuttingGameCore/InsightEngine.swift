@@ -21,12 +21,19 @@ public struct InsightEngine {
             stats.append((distance, attempts, accuracy))
         }
         guard !stats.isEmpty else { return .none }
+        // sort stats by accuracy (lowest first) with distance as tiebreaker
+        let sortedStats = stats.sorted { lhs, rhs in
+            if lhs.accuracy == rhs.accuracy {
+                return lhs.distance < rhs.distance
+            }
+            return lhs.accuracy < rhs.accuracy
+        }
         // determine 25th percentile accuracy
-        let accuracies = stats.map { $0.accuracy }.sorted()
+        let accuracies = sortedStats.map { $0.accuracy }
         let idx = Int(Double(accuracies.count - 1) * 0.25)
         let threshold = accuracies[idx]
-        // find first distance with accuracy <= threshold
-        if let target = stats.first(where: { $0.accuracy <= threshold }) {
+        // pick the first distance within the bottom quartile
+        if let target = sortedStats.first(where: { $0.accuracy <= threshold }) {
             return .ladder(distance: target.distance)
         }
         return .none

@@ -45,4 +45,22 @@ struct InsightEngineTests {
             Issue.record("Expected a ladder insight")
         }
     }
+
+    // Ensure that insertion order of shots does not affect the insight recommendation
+    @Test func ladderRecommendationOrderIndependence() throws {
+        var shots: [Shot] = []
+        // append in mixed order to mimic random session logs
+        for i in 0..<20 {
+            shots.append(Shot(distanceFt: 7, breakType: .straight, greenSpeed: .medium, result: i < 10))
+        }
+        for i in 0..<20 {
+            shots.append(Shot(distanceFt: 3, breakType: .straight, greenSpeed: .medium, result: i < 15))
+        }
+        for i in 0..<20 {
+            shots.append(Shot(distanceFt: 5, breakType: .straight, greenSpeed: .medium, result: i < 5))
+        }
+        let session = Session(shots: shots)
+        let engine = InsightEngine()
+        #expect(engine.insight(for: session) == .ladder(distance: 5))
+    }
 }
